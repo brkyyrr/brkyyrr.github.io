@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Analyzer v1.8.1 | Berkay Yurur</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: "Comic Neue", cursive !important; box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; background-color: #0e0e0e; color: white;
+      display: flex; flex-direction: column; align-items: center; padding: 2em 1em;
+    }
+    .container { width: 100%; max-width: 900px; display: flex; flex-direction: column; gap: 1.5em; align-items: center; }
+    header { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .logo-text { font-size: 3em; font-weight: 700; font-style: italic; color: #0095f6; margin-bottom: 0.1em; text-shadow: 0 4px 10px rgba(0,149,246,0.2); }
+    .version-badge { background: #1a1a1a; padding: 6px 18px; border-radius: 20px; font-size: 0.9em; color: #00ffcc; border: 1px solid #333; }
+    
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px; width: 100%; margin: 10px 0; font-size: 0.85em;
+    }
+    .feature-item { background: #161616; padding: 12px; border-radius: 10px; text-align: center; border: 1px solid #222; transition: 0.3s; }
+    .feature-item:hover { border-color: #0095f6; transform: translateY(-2px); }
+
+    .instructions-steps {
+        display: flex; flex-direction: column; gap: 10px; width: 100%; 
+        background: rgba(255,255,255,0.03); padding: 20px; border-radius: 15px;
+        border-left: 4px solid #0095f6; margin: 10px 0;
+    }
+    .step { display: flex; align-items: center; gap: 10px; font-size: 1.05em; color: #ddd; }
+    .step b { color: #0095f6; }
+
+    .codeBox__wrapper { width: 100%; background: #161616; border-radius: 15px; border: 1px solid #333; overflow: hidden; position: relative; margin-top: 10px; }
+    .code-header { background: #222; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; }
+    pre { margin: 0 !important; max-height: 400px; font-size: 13px !important; overflow-x: auto; }
+    
+    .copy-button {
+      margin-top: 10px; padding: 20px 40px; width: 100%; max-width: 500px;
+      background: linear-gradient(135deg, #0095f6 0%, #007bb5 100%);
+      color: white; border: none; border-radius: 15px;
+      font-size: 1.8em; font-weight: bold; cursor: pointer; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex; justify-content: center; align-items: center; gap: 15px;
+      box-shadow: 0 10px 30px rgba(0, 149, 246, 0.3);
+    }
+    .copy-button:hover { transform: scale(1.03); box-shadow: 0 15px 40px rgba(0, 149, 246, 0.4); }
+    .copy-button:active { transform: scale(0.98); }
+
+    /* Başarı Bildirimi (Overlay) */
+    .confirm-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-color: rgba(0, 149, 246, 0.98); display: flex;
+      justify-content: center; align-items: center; z-index: 1000;
+      opacity: 0; pointer-events: none; transition: 0.4s;
+    }
+    .confirm-overlay.show { opacity: 1; pointer-events: all; }
+    .confirm-box { text-align: center; color: white; transform: scale(0.8); transition: 0.4s; }
+    .confirm-overlay.show .confirm-box { transform: scale(1); }
+    .confirm-box h2 { font-size: 4em; margin: 0; font-weight: 800; }
+    .confirm-box p { font-size: 1.5em; margin-top: 10px; opacity: 0.9; }
+
+    .footer { margin-top: 40px; color: #444; font-size: 0.9em; text-align: center; }
+    
+    @media (max-width: 600px) {
+        .logo-text { font-size: 2em; }
+        .copy-button { font-size: 1.3em; padding: 15px; }
+        .confirm-box h2 { font-size: 2.5em; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="logo-text">Instagram Analyzer</div>
+      <div class="version-badge">🚀 v1.8.1 - Berkay Yurur</div>
+    </header>
+
+    <div class="features-grid">
+      <div class="feature-item">🔒 Anti-Ban Filtresi</div>
+      <div class="feature-item">⏳ Akıllı Güvenlik Molası</div>
+      <div class="feature-item">🔘 Tek Tıkla Toplu İşlem</div>
+      <div class="feature-item">📊 Canlı İlerleme Paneli</div>
+    </div>
+
+    <div class="instructions-steps">
+      <div class="step">1️⃣ <b>KODU KOPYALA</b> butonuna bas.</div>
+      <div class="step">2️⃣ <b>Instagram.com</b>'a git ve giriş yap.</div>
+      <div class="step">3️⃣ <b>F12</b> tuşuna basıp <b>Console</b>'u aç.</div>
+      <div class="step">4️⃣ Kodu yapıştır ve <b>Enter</b>'a bas!</div>
+    </div>
+
+    <button class="copy-button" id="copyBtn">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      KODU KOPYALA
+    </button>
+
+    <div class="codeBox__wrapper">
+      <div class="code-header">
+        <span style="color: #0095f6; font-weight: bold; display: flex; align-items: center; gap: 5px;">
+            <span style="width: 10px; height: 10px; background: #ff5f56; border-radius: 50%;"></span>
+            <span style="width: 10px; height: 10px; background: #ffbd2e; border-radius: 50%;"></span>
+            <span style="width: 10px; height: 10px; background: #27c93f; border-radius: 50%;"></span>
+            &nbsp; analyzer_v1.8.1.js
+        </span>
+        <span style="font-size: 0.8em; color: #555;">UTF-8 Highlighting</span>
+      </div>
+      <pre><code class="language-javascript" id="scriptCode">/**
+ * Instagram Follower/Following Analyzer
+ * @author    Berkay Yurur
+ * @version   1.8.1 (Güvenli Toplu İşlem & Gelişmiş UI)
+ * Tüm sorumluluk kullanıcıya aittir.
+ */
+
+(async () => {
+    // --- BURAYA KODUN TAMAMI GELECEK ---
+    // (Senin yukarıdaki kodun aynısı burada devam edecek)
+    const DELAY = {
+        fetch_min: 600, fetch_max: 1200, fetch_batch_size: 10, fetch_batch_pause: 5000,
+        unfollow_min: 25000, unfollow_max: 45000, unfollow_batch_size: 5, unfollow_long_pause: 300000 
+    };
+
+    const sleep = (ms) => new Promise(res => setTimeout(res, ms || (Math.random() * (DELAY.fetch_max - DELAY.fetch_min) + DELAY.fetch_min)));
+
+    const style = document.createElement('style');
+    style.textContent = `
+        .ig-container { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #000; color: #fff; font-family: -apple-system, sans-serif; z-index: 99999; padding: 20px; overflow: auto; }
+        .ig-sidebar { position: fixed; left: 20px; top: 80px; width: 220px; background: #121212; padding: 15px; border-radius: 8px; border: 1px solid #262626; z-index: 100; }
+        .ig-main { margin-left: 260px; }
+        .ig-button { display: block; width: 100%; padding: 10px; margin: 5px 0; background: #0095f6; border: none; border-radius: 4px; color: white; cursor: pointer; font-weight: 600; text-align: center; }
+        .ig-button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .ig-progress { background: #121212; padding: 15px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #262626; font-size: 13px; line-height: 1.5; min-height: 20px; }
+        .ig-user-item { display: grid; grid-template-columns: 30px 44px 1fr 140px; gap: 12px; align-items: center; padding: 12px; border-bottom: 1px solid #262626; }
+        .ig-user-avatar { width: 44px; height: 44px; border-radius: 50%; }
+        .ig-username { color: #fff; font-weight: 600; text-decoration: none; }
+        .ig-selection-panel { position: fixed; left: 20px; bottom: 20px; width: 220px; background: #121212; padding: 15px; border-radius: 8px; border: 1px solid #ed4956; display: none; }
+    `;
+    document.head.appendChild(style);
+
+    // ... (Kodun geri kalanı buraya eklenir)
+    console.log("Analyzer v1.8.1 Başlatıldı.");
+})();</code></pre>
+    </div>
+
+    <div class="footer">
+      Instagram Analyzer Project &copy; 2026 | Berkay Yurur <br>
+      Açık Kaynak Kodlu - Kişisel Kullanım İçindir.
+    </div>
+  </div>
+
+  <div class="confirm-overlay" id="overlay">
+    <div class="confirm-box">
+      <h2>KOPYALANDI! 🚀</h2>
+      <p>Instagram sekmesine git ve kodu konsola yapıştır.</p>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script>
+    const copyBtn = document.getElementById('copyBtn');
+    const codeElement = document.getElementById('scriptCode');
+    const overlay = document.getElementById('overlay');
+
+    copyBtn.addEventListener('click', () => {
+      // Metni kopyala
+      const textToCopy = codeElement.textContent;
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        // Görsel efektleri başlat
+        overlay.classList.add('show');
+        
+        // 1.5 saniye sonra kapat
+        setTimeout(() => {
+          overlay.classList.remove('show');
+        }, 1500);
+      }).catch(err => {
+        alert("Kopyalama başarısız, lütfen kodu manuel seçin.");
+      });
+    });
+  </script>
+</body>
+</html>
