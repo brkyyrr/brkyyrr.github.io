@@ -76,7 +76,7 @@
 
     <script type="text/plain" id="rawCodeSource">
 (async () => {
-    // GÜVENLİK AYARLARI (Örnek koddaki insansı bekleme süreleri baz alındı)
+    // GÜVENLİK AYARLARI
     const DELAY = {
         fetch_min: 600,
         fetch_max: 1200,
@@ -146,7 +146,6 @@
         el.innerHTML = `<strong>${isF ? 'Takipçiler' : 'Takip Edilenler'}:</strong> %${((cur/tot)*100).toFixed(1)} (${cur}/${tot})`;
     };
 
-    // ÖRNEK KOD.JS İÇERİSİNDEKİ KRİTİK İSTEK YAPISI (Onarıldı)
     const unfollowAction = async (id) => {
         const csrfToken = document.cookie.match(/csrftoken=([^;]+)/)?.[1];
         try {
@@ -159,7 +158,7 @@
                     'X-Requested-With': 'XMLHttpRequest',
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                credentials: 'include' // Oturum bilgilerini taşımak için şart
+                credentials: 'include'
             });
             const json = await res.json();
             return json.status === 'ok';
