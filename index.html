@@ -102,9 +102,10 @@
                 <span style="font-size: 0.8em; color: #555;">UTF-8 Highlighting</span>
             </div>
             <pre><code class="language-javascript" id="scriptCode">/**
+ /**
  * Instagram Follower/Following Analyzer
  * @author    Berkay Yurur
- * @version   1.8.1 (Güvenli Toplu İşlem & Gelişmiş UI)
+ * @version    1.8.1 (Güvenli Toplu İşlem & Gelişmiş UI)
  */
 
 (async () => {
@@ -172,12 +173,13 @@
     const updateUIProgress = (isF, cur, tot) => {
         const id = isF ? 'prog-fol' : 'prog-foll';
         let container = document.querySelector('.ig-progress');
-        if (!container) return;
+        if (!container) return; // Hata önleyici
         let el = document.getElementById(id);
         if(!el) { el = document.createElement('div'); el.id = id; container.appendChild(el); }
         el.innerHTML = `<strong>${isF ? 'Takipçiler' : 'Takip Edilenler'}:</strong> %${((cur/tot)*100).toFixed(1)} (${cur}/${tot})`;
     };
 
+    // ÖRNEK KOD.JS İÇERİSİNDEKİ KRİTİK İSTEK YAPISI (Onarıldı)
     const unfollowAction = async (id) => {
         const csrfToken = document.cookie.match(/csrftoken=([^;]+)/)?.[1];
         try {
@@ -190,7 +192,7 @@
                     'X-Requested-With': 'XMLHttpRequest',
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                credentials: 'include'
+                credentials: 'include' // Oturum bilgilerini taşımak için şart
             });
             const json = await res.json();
             return json.status === 'ok';
@@ -226,6 +228,7 @@
             </div>
         `;
 
+        // Eventleri her seferinde yeniden bağlamalıyız (v1.8.0 mantığı)
         document.querySelectorAll('.ig-checkbox').forEach(cb => {
             cb.onclick = () => {
                 const selected = document.querySelectorAll('.ig-checkbox:checked').length;
@@ -290,6 +293,7 @@
         document.getElementById('selectionPanel').style.display = 'none';
     };
 
+    // UI Kurulumu (v1.8.0 Orijinal Yapı)
     const container = document.createElement('div');
     container.className = 'ig-container';
     container.innerHTML = `
@@ -342,7 +346,6 @@
     document.getElementById('hidePrivateFollowers').onchange = () => showUsers(currentDataInView, currentTitleInView);
     document.getElementById('hidePrivateFollowing').onchange = () => showUsers(currentDataInView, currentTitleInView);
 
-    console.log("Analyzer v1.8.1 Başlatıldı.");
 })();</code></pre>
         </div>
 
