@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Analyzer v1.8.1 | Berkay Yurur</title>
+    <title>Instagram Analyzer v1.8.2 | Berkay Yurur</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -176,9 +176,16 @@
         if ((title === "Takip Edilenler" || title.includes("Etmeyenler")) && hFoll) filtered = users.filter(u => !u.isPrivate);
 
         const mainDiv = document.querySelector('.ig-main');
+        
+        // YENİ EKLENEN KISIM: Başlığın yanına "Tümünü Seç" kutucuğu eklendi
         mainDiv.innerHTML = `
             <div class="ig-progress" id="log-status">Şu an: ${title}</div>
-            <h3>${title} (${filtered.length})</h3>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3 style="margin: 0;">${title} (${filtered.length})</h3>
+                <label style="cursor: pointer; background: #1a1a1a; padding: 8px 12px; border-radius: 6px; border: 1px solid #333; font-size: 13px; display: flex; align-items: center; gap: 8px;">
+                    <input type="checkbox" id="selectAllCheckbox"> Tümünü Seç
+                </label>
+            </div>
             <div class="ig-results">
                 ${filtered.map(u => `
                     <div class="ig-user-item">
@@ -200,8 +207,28 @@
                 const selected = document.querySelectorAll('.ig-checkbox:checked').length;
                 document.getElementById('selectionPanel').style.display = selected > 0 ? 'block' : 'none';
                 document.getElementById('selectedCountText').innerText = `${selected} kullanıcı seçildi`;
+                
+                // Eğer manuel olarak seçim kaldırılırsa "Tümünü Seç" tikini de kaldır
+                if (!cb.checked) {
+                    document.getElementById('selectAllCheckbox').checked = false;
+                }
             };
         });
+
+        // YENİ EKLENEN KISIM: "Tümünü Seç" tıklama olayının yakalanması
+        const selectAllCb = document.getElementById('selectAllCheckbox');
+        if (selectAllCb) {
+            selectAllCb.onchange = (e) => {
+                const isChecked = e.target.checked;
+                document.querySelectorAll('.ig-checkbox').forEach(cb => {
+                    cb.checked = isChecked;
+                });
+                
+                const selected = document.querySelectorAll('.ig-checkbox:checked').length;
+                document.getElementById('selectionPanel').style.display = selected > 0 ? 'block' : 'none';
+                document.getElementById('selectedCountText').innerText = `${selected} kullanıcı seçildi`;
+            };
+        }
 
         document.querySelectorAll('.unfollow-btn').forEach(btn => {
             btn.onclick = async () => {
@@ -257,6 +284,10 @@
         alert('İşlem bitti.');
         bulkBtn.disabled = false;
         document.getElementById('selectionPanel').style.display = 'none';
+        
+        // İşlem bitince tümünü seç tikini de temizle
+        const selectAllCb = document.getElementById('selectAllCheckbox');
+        if(selectAllCb) selectAllCb.checked = false;
     };
 
     // UI Kurulumu (v1.8.0 Orijinal Yapı)
