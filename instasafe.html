@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstaSafe Pro | Instagram Analiz ve Yönetim Aracı</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background-color: #080808; color: white; line-height: 1.6; }
+        
+        /* Navbar */
+        nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1a1a1a; }
+        .logo { font-weight: 800; font-size: 1.5rem; text-decoration: none; color: white; }
+        .back-link { text-decoration: none; color: #888; font-size: 0.9rem; transition: 0.3s; }
+        .back-link:hover { color: white; }
+
+        /* Hero Section */
+        .hero { padding: 80px 20px; text-align: center; background: radial-gradient(circle at top, #05101a 0%, #080808 100%); border-bottom: 1px solid #111; }
+        .badge { display: inline-block; padding: 5px 15px; border-radius: 50px; background: rgba(0, 149, 246, 0.1); color: #0095f6; font-size: 0.8rem; font-weight: 700; margin-bottom: 20px; border: 1px solid rgba(0, 149, 246, 0.2); letter-spacing: 1px; }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -1px; }
+        .hero span { color: #0095f6; }
+        .hero p { color: #aaa; font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px; }
+
+        /* CTA Buttons */
+        .cta-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .btn { padding: 16px 32px; border-radius: 12px; font-weight: 700; text-decoration: none; transition: 0.3s; font-size: 1rem; display: flex; align-items: center; gap: 10px; }
+        .btn-primary { background-color: #0095f6; color: white; box-shadow: 0 10px 20px rgba(0, 149, 246, 0.2); }
+        .btn-primary:hover { background-color: #1aa1f7; transform: translateY(-3px); }
+        .btn-secondary { background-color: #1a1a1a; color: white; border: 1px solid #333; }
+        .btn-secondary:hover { background-color: #222; border-color: #444; }
+
+        /* Features Section */
+        .section-title { text-align: center; padding: 60px 20px 20px; font-size: 2rem; font-weight: 800; }
+        .features { padding: 40px 20px 80px; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .f-card { padding: 35px; background: #111; border-radius: 24px; border: 1px solid #222; transition: 0.3s; }
+        .f-card:hover { border-color: #333; background: #141414; }
+        .f-card h3 { font-size: 1.4rem; margin-bottom: 15px; color: #0095f6; }
+        .f-card p { color: #888; font-size: 0.95rem; }
+
+        /* Security Box */
+        .safety-container { padding: 60px 20px; max-width: 900px; margin: 0 auto; }
+        .safety-box { padding: 40px; background: linear-gradient(145deg, #0d0d0d 0%, #111 100%); border: 1px solid #222; border-radius: 30px; text-align: center; position: relative; overflow: hidden; }
+        .safety-box::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #0095f6, #00f2ea); }
+        .safety-box h4 { color: #fff; font-size: 1.5rem; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .safety-box p { color: #aaa; font-size: 1rem; line-height: 1.7; }
+
+        /* Footer */
+        footer { text-align: center; padding: 80px 20px; border-top: 1px solid #1a1a1a; color: #555; font-size: 0.85rem; }
+        .footer-brand { color: #888; font-weight: 700; margin-bottom: 15px; display: block; }
+        .footer-disclaimer { max-width: 700px; margin: 20px auto 0; font-size: 0.75rem; color: #444; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">ByOnTheCode</a>
+        <a href="index.html" class="back-link">&larr; Tüm Araçlara Dön</a>
+    </nav>
+
+    <section class="hero">
+        <span class="badge">ŞİMDİ YAYINDA</span>
+        <h1>InstaSafe <span>Pro</span></h1>
+        <p>Instagram kitlenizi şifre paylaşmadan, güvenli ve hızlı bir şekilde analiz edin. Sizi takip etmeyenleri ve profilinizin sağlığını saniyeler içinde keşfedin.</p>
+        
+        <div class="cta-group">
+            <a href="#" class="btn btn-primary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                Mağazada İncele
+            </a>
+            <a href="#" class="btn btn-secondary">Lisans Satın Al</a>
+        </div>
+    </section>
+
+    <h2 class="section-title">Neden InstaSafe Pro?</h2>
+    <div class="features">
+        <div class="f-card">
+            <h3>Şifresiz Güvenlik</h3>
+            <p>Hesap şifrenizi asla talep etmez. Sadece aktif Instagram oturumunuz üzerinden yerel olarak çalışarak güvenliğinizi korur.</p>
+        </div>
+        <div class="f-card">
+            <h3>Gelişmiş Algoritma</h3>
+            <p>Instagram limitleriyle uyumlu, rastgele beklemeli işlem yapısı sayesinde hesabınızın "spam" olarak algılanmasını engeller.</p>
+        </div>
+        <div class="f-card">
+            <h3>Hızlı Raporlama</h3>
+            <p>Takip etmeyenleri, pasif hesapları ve gizli profilleri saniyeler içinde analiz edip listelemenizi sağlar.</p>
+        </div>
+    </div>
+
+    <div class="safety-container">
+        <div class="safety-box">
+            <h4>🔐 Güvenlik Odaklı Mimari</h4>
+            <p>InstaSafe Pro, verilerinizin gizliliğini en üst düzeyde tutar. Analiz edilen hiçbir veri uzak sunuculara veya veritabanlarına kaydedilmez. Tüm süreç tamamen sizin tarayıcınızda ve yerel belleğinizde gerçekleşir.</p>
+        </div>
+    </div>
+
+    <footer>
+        <span class="footer-brand">© 2026 ByOnTheCode Software Studio. Tüm hakları saklıdır.</span>
+        <div class="footer-disclaimer">
+            Instagram, Meta Inc.'in ticari markasıdır. Bu eklenti tamamen bağımsız bir yazılım olup, Instagram veya Meta ile resmi bir bağı bulunmamaktadır.
+        </div>
+    </footer>
+
+</body>
+</html>
