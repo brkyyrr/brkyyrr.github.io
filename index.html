@@ -9,7 +9,25 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
         body { background-color: #080808; color: white; line-height: 1.6; }
         
-        .hero { height: 50vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: radial-gradient(circle at center, #111 0%, #080808 100%); padding: 20px; }
+        .hero { height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: radial-gradient(circle at center, #111 0%, #080808 100%); padding: 20px; }
+        
+        /* Ana Logo Stili */
+        .brand-logo { 
+            width: 120px; 
+            height: 120px; 
+            border-radius: 30px; 
+            margin-bottom: 25px; 
+            border: 2px solid #222;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            object-fit: cover;
+        }
+        .brand-logo:hover {
+            transform: scale(1.08) rotate(2deg);
+            border-color: #444;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+
         h1 { font-size: 4rem; font-weight: 800; background: linear-gradient(90deg, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
         .hero p { color: #888; font-size: 1.2rem; max-width: 600px; }
         
@@ -18,7 +36,7 @@
         .card { background: #111; border: 1px solid #222; border-radius: 24px; padding: 35px; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-decoration: none; color: white; position: relative; display: flex; flex-direction: column; }
         .card:hover { border-color: #444; transform: translateY(-10px); background: #151515; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
         
-        /* İkon Çerçeve Stilleri */
+        /* Proje İkon Çerçeve Stilleri */
         .icon-wrapper { width: 70px; height: 70px; border-radius: 18px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; background: #000; border: 1px solid #333; transition: 0.3s; overflow: hidden; }
         .icon-wrapper img { width: 100%; height: 100%; object-fit: cover; }
         .card:hover .icon-wrapper { transform: scale(1.1); border-color: #555; }
@@ -42,6 +60,8 @@
 </head>
 <body>
     <section class="hero">
+        <img src="assets/byonthecode_icon2.png" alt="ByOnTheCode Studio Logo" class="brand-logo">
+        
         <h1>ByOnTheCode</h1>
         <p>Gelecek nesil veri analizi ve otomasyon araçları. Güvenli, hızlı ve kullanıcı odaklı.</p>
     </section>
@@ -49,7 +69,7 @@
     <div class="projects">
         <a href="instasafe/" class="card">
             <div class="tag-row">
-                <span class="tag status-live">CANLI</span>
+                <span class="tag status-soon">YAKINDA</span>
             </div>
             <div class="icon-wrapper">
                 <img src="assets/InstaSafe_Pro_icon.png" alt="InstaSafe Pro İkon">
@@ -68,7 +88,7 @@
             </div>
             <h2>TikSafe Pro</h2>
             <p>TikTok kitlenizi derinlemesine analiz edin. Takip etmeyenleri ve etkileşim oranlarını tek tıkla tespit edin.</p>
-            <div class="action-link" style="color: #ff0050;">Daha Fazla Bilgi &rarr;                </div>
+            <div class="action-link" style="color: #ff0050;">İncele &rarr;</div>
         </a>
     </div>
 
