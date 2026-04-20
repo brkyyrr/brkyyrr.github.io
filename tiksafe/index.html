@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikSafe Pro | TikTok Analiz ve Yönetim Aracı</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background-color: #080808; color: white; line-height: 1.6; }
+        
+        /* Navbar */
+        nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1a1a1a; }
+        .logo { font-weight: 800; font-size: 1.5rem; text-decoration: none; color: white; }
+        .back-link { text-decoration: none; color: #888; font-size: 0.9rem; transition: 0.3s; }
+        .back-link:hover { color: white; }
+
+        /* Hero Section */
+        .hero { padding: 80px 20px; text-align: center; background: radial-gradient(circle at top, #1a050d 0%, #080808 100%); }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -1px; }
+        .hero span { color: #ff0050; } /* TikTok Kırmızısı */
+        .hero p { color: #aaa; font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px; }
+
+        /* Buttons */
+        .cta-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .btn { padding: 15px 35px; border-radius: 12px; font-weight: 700; text-decoration: none; transition: 0.3s; font-size: 1rem; }
+        .btn-primary { background-color: #ff0050; color: white; box-shadow: 0 10px 20px rgba(255, 0, 80, 0.2); }
+        .btn-primary:hover { background-color: #ff2d6b; transform: translateY(-3px); }
+        .btn-secondary { background-color: #1a1a1a; color: white; border: 1px solid #333; }
+        .btn-secondary:hover { background-color: #222; }
+
+        /* Features */
+        .features { padding: 80px 20px; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .f-card { padding: 30px; background: #111; border-radius: 20px; border: 1px solid #222; }
+        .f-card h3 { font-size: 1.4rem; margin-bottom: 15px; color: #00f2ea; } /* TikTok Cyan */
+        .f-card p { color: #888; font-size: 0.95rem; }
+
+        /* Safety Note */
+        .safety-box { max-width: 800px; margin: 40px auto; padding: 30px; background: rgba(0, 242, 234, 0.05); border: 1px dashed #00f2ea; border-radius: 20px; text-align: center; }
+        .safety-box h4 { color: #00f2ea; margin-bottom: 10px; }
+
+        footer { text-align: center; padding: 60px; border-top: 1px solid #222; color: #555; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">ByOnTheCode</a>
+        <a href="index.html" class="back-link">&larr; Tüm Araçlar</a>
+    </nav>
+
+    <section class="hero">
+        <div style="font-weight: bold; color: #00f2ea; margin-bottom: 10px; letter-spacing: 2px;">ÇOK YAKINDA</div>
+        <h1>TikSafe <span>Pro</span></h1>
+        <p>TikTok kitlenizi şifre paylaşmadan, güvenli ve hızlı bir şekilde analiz edin. Sizi takip etmeyenleri saniyeler içinde keşfedin.</p>
+        
+        <div class="cta-group">
+            <a href="#" class="btn btn-primary">Mağazada İncele (Yakında)</a>
+            <a href="#" class="btn btn-secondary">Lisans Satın Al</a>
+        </div>
+    </section>
+
+    <div class="features">
+        <div class="f-card">
+            <h3>Şifresiz Erişim</h3>
+            <p>TikTok hesabınıza giriş yapmanıza gerek kalmadan, sadece tarayıcı oturumunuzu kullanarak güvenli analiz yapar.</p>
+        </div>
+        <div class="f-card">
+            <h3>Akıllı Mola Sistemi</h3>
+            <p>TikTok algoritmalarına takılmamanız için işlemler arasına otomatik insansı bekleme süreleri ekler.</p>
+        </div>
+        <div class="f-card">
+            <h3>Gelişmiş Filtreleme</h3>
+            <p>Sizi takip etmeyenleri, profil resmi olmayanları veya pasif hesapları anında listeleyin.</p>
+        </div>
+    </div>
+
+    <div class="safety-box">
+        <h4>🔐 Güvenlik Odaklı Mimari</h4>
+        <p>Verileriniz asla uzak sunuculara kaydedilmez. Tüm analiz süreci kendi bilgisayarınızda gerçekleşir ve gizliliğiniz en üst düzeyde korunur.</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 ByOnTheCode Software Studio. Tüm hakları saklıdır.</p>
+        <p style="margin-top: 10px; font-size: 0.75rem;">TikTok, ByteDance Ltd.'nin ticari markasıdır. Bu eklenti bağımsız bir yazılımdır.</p>
+    </footer>
+
+</body>
+</html>
