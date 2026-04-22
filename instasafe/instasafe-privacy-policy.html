@@ -6,48 +6,120 @@
     <title>Privacy Policy - InstaSafe Pro</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; padding: 40px; max-width: 800px; margin: 0 auto; background-color: #121212; color: #e0e0e0; }
+        
+        /* InstaSafe Colors */
         h1 { color: #0095f6; border-bottom: 2px solid #333; padding-bottom: 10px; }
         h2 { color: #d62976; margin-top: 30px; font-size: 1.2em; }
-        .container { background: #1a1a1a; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); border: 1px solid #333; }
+        
+        .container { background: #1a1a1a; padding: 30px 40px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); border: 1px solid #333; position: relative; }
         ul { padding-left: 20px; }
         li { margin-bottom: 10px; color: #ccc; }
         strong { color: #fff; }
-        a { color: #0095f6; text-decoration: none; font-weight: bold; }
-        a:hover { text-decoration: underline; }
+        a { color: #0095f6; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        a:hover { color: #fff; }
         .last-updated { font-size: 0.9em; color: #888; margin-bottom: 20px; }
+        
+        /* Language Switcher Styles */
+        .lang-switch { position: absolute; top: 30px; right: 40px; display: flex; gap: 5px; background: #111; padding: 5px; border-radius: 8px; border: 1px solid #333; }
+        .lang-switch button { background: transparent; border: none; color: #888; padding: 6px 12px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 0.85em; transition: 0.3s; }
+        .lang-switch button.active { background: #333; color: #fff; }
+        .lang-switch button:hover:not(.active) { color: #fff; }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            body { padding: 20px; }
+            .lang-switch { position: static; display: inline-flex; margin-bottom: 20px; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Privacy Policy for InstaSafe Pro</h1>
-        <p class="last-updated"><strong>Last Updated:</strong> April 2026</p>
+        <div class="lang-switch">
+            <button id="btn-en" class="active" onclick="switchLang('en')">EN</button>
+            <button id="btn-tr" onclick="switchLang('tr')">TR</button>
+        </div>
 
-        <p>InstaSafe Pro ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how your information is collected, used, and protected when you use our Chrome Extension.</p>
+        <div id="content-en">
+            <h1>Privacy Policy for InstaSafe Pro</h1>
+            <p class="last-updated"><strong>Last Updated:</strong> April 2026</p>
 
-        <h2>1. Data Collection and Processing</h2>
-        <ul>
-            <li><strong>No Passwords Collected:</strong> InstaSafe Pro does NOT request, collect, or store your Instagram password.</li>
-            <li><strong>Local Processing:</strong> All analysis regarding your Instagram followers and following lists is performed locally on your browser. This data is never transmitted to our servers.</li>
-            <li><strong>Licensing & Compliance Data:</strong> To manage premium access and prevent abuse, we collect and securely store:
-                <ul>
-                    <li>Your provided License Key.</li>
-                    <li>A randomly generated Device ID (to tie the license to your browser).</li>
-                    <li>A timestamp of when you accepted the legal disclaimer.</li>
-                </ul>
-            </li>
-        </ul>
+            <p>InstaSafe Pro ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how your information is collected, used, and protected when you use our Chrome Extension.</p>
 
-        <h2>2. Third-Party Services</h2>
-        <p>We use <strong>Google Firebase Realtime Database</strong> strictly for license validation and storing compliance logs (disclaimer acceptance). Firebase is subject to Google's strict privacy and security standards.</p>
+            <h2>1. Data Collection and Processing</h2>
+            <ul>
+                <li><strong>No Passwords Collected:</strong> InstaSafe Pro does NOT request, collect, or store your Instagram password.</li>
+                <li><strong>Local Processing:</strong> All analysis regarding your Instagram followers and following lists is performed locally on your browser. This data is never transmitted to our servers.</li>
+                <li><strong>Licensing & Compliance Data:</strong> To manage premium access and prevent abuse, we collect and securely store:
+                    <ul>
+                        <li>Your provided License Key.</li>
+                        <li>A randomly generated Device ID (to tie the license to your browser).</li>
+                        <li>A timestamp of when you accepted the legal disclaimer.</li>
+                    </ul>
+                </li>
+            </ul>
 
-        <h2>3. Data Usage</h2>
-        <p>The minimal data we collect (Licensing Data) is used solely for the operation and security of the extension. <strong>We do not sell, trade, or otherwise transfer your data to outside parties.</strong> We do not use your data for advertising, credit-checking, or any unrelated purposes.</p>
+            <h2>2. Third-Party Services</h2>
+            <p>We use <strong>Google Firebase Realtime Database</strong> strictly for license validation and storing compliance logs (disclaimer acceptance). Firebase is subject to Google's strict privacy and security standards.</p>
 
-        <h2>4. User Rights</h2>
-        <p>Since your Instagram data is processed locally, you maintain full control over it by simply clearing your browser's local storage or uninstalling the extension. For license removal or inquiries, please contact us.</p>
+            <h2>3. Data Usage</h2>
+            <p>The minimal data we collect (Licensing Data) is used solely for the operation and security of the extension. <strong>We do not sell, trade, or otherwise transfer your data to outside parties.</strong> We do not use your data for advertising, credit-checking, or any unrelated purposes.</p>
 
-        <h2>5. Contact Us</h2>
-        <p>If you have any questions regarding this Privacy Policy, you may contact us at: <br><a href="mailto:byonthecode@gmail.com">byonthecode@gmail.com</a></p>
+            <h2>4. User Rights</h2>
+            <p>Since your Instagram data is processed locally, you maintain full control over it by simply clearing your browser's local storage or uninstalling the extension. For license removal or inquiries, please contact us.</p>
+
+            <h2>5. Contact Us</h2>
+            <p>If you have any questions regarding this Privacy Policy, you may contact us at: <br><a href="mailto:byonthecode@gmail.com">byonthecode@gmail.com</a></p>
+        </div>
+
+        <div id="content-tr" style="display: none;">
+            <h1>InstaSafe Pro Gizlilik Politikası</h1>
+            <p class="last-updated"><strong>Son Güncelleme:</strong> Nisan 2026</p>
+
+            <p>InstaSafe Pro ("biz" veya "bizim"), gizliliğinizi korumaya kararlıdır. Bu Gizlilik Politikası, Chrome Eklentimizi kullandığınızda bilgilerinizin nasıl toplandığını, kullanıldığını ve korunduğunu açıklar.</p>
+
+            <h2>1. Veri Toplama ve İşleme</h2>
+            <ul>
+                <li><strong>Şifre Talep Edilmez:</strong> InstaSafe Pro, Instagram şifrenizi ASLA talep etmez, toplamaz veya saklamaz.</li>
+                <li><strong>Yerel İşlem (Local Processing):</strong> Instagram takipçi ve takip edilen listelerinizle ilgili tüm analizler yalnızca tarayıcınız üzerinde, yerel olarak gerçekleştirilir. Bu veriler hiçbir zaman sunucularımıza iletilmez.</li>
+                <li><strong>Lisans ve Uyumluluk Verileri:</strong> Premium erişimi yönetmek ve kötüye kullanımı önlemek amacıyla şu verileri toplar ve güvenle saklarız:
+                    <ul>
+                        <li>Sağladığınız Lisans Anahtarı.</li>
+                        <li>Rastgele oluşturulmuş bir Cihaz Kimliği (lisansı tarayıcınıza bağlamak için).</li>
+                        <li>Yasal uyarıyı kabul ettiğinizin zaman damgası (timestamp).</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h2>2. Üçüncü Taraf Hizmetler</h2>
+            <p>Yalnızca lisans doğrulama ve uyumluluk kayıtlarını (yasal uyarı kabulü) saklamak için <strong>Google Firebase Realtime Database</strong> kullanıyoruz. Firebase, Google'ın katı gizlilik ve güvenlik standartlarına tabidir.</p>
+
+            <h2>3. Veri Kullanımı</h2>
+            <p>Topladığımız minimal veriler (Lisans Verileri) yalnızca eklentinin çalışması ve güvenliği için kullanılır. <strong>Verilerinizi satmıyor, takas etmiyor veya dış taraflara aktarmıyoruz.</strong> Verilerinizi reklam, kredi kontrolü veya ilgisiz herhangi bir amaç için kullanmıyoruz.</p>
+
+            <h2>4. Kullanıcı Hakları</h2>
+            <p>Instagram verileriniz yerel olarak işlendiğinden, tarayıcınızın yerel depolama alanını temizleyerek veya eklentiyi kaldırarak verileriniz üzerinde tam kontrole sahip olursunuz. Lisans silme işlemleri veya sorularınız için bizimle iletişime geçebilirsiniz.</p>
+
+            <h2>5. İletişim</h2>
+            <p>Bu Gizlilik Politikası ile ilgili herhangi bir sorunuz varsa, bize şu adresten ulaşabilirsiniz: <br><a href="mailto:byonthecode@gmail.com">byonthecode@gmail.com</a></p>
+        </div>
     </div>
+
+    <script>
+        function switchLang(lang) {
+            if (lang === 'tr') {
+                document.getElementById('content-en').style.display = 'none';
+                document.getElementById('content-tr').style.display = 'block';
+                document.getElementById('btn-en').classList.remove('active');
+                document.getElementById('btn-tr').classList.add('active');
+                document.title = "Gizlilik Politikası - InstaSafe Pro";
+            } else {
+                document.getElementById('content-tr').style.display = 'none';
+                document.getElementById('content-en').style.display = 'block';
+                document.getElementById('btn-tr').classList.remove('active');
+                document.getElementById('btn-en').classList.add('active');
+                document.title = "Privacy Policy - InstaSafe Pro";
+            }
+        }
+    </script>
 </body>
 </html>
