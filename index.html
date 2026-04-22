@@ -9,28 +9,72 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
         body { background-color: #080808; color: white; line-height: 1.6; }
         
-        .hero { height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: radial-gradient(circle at center, #111 0%, #080808 100%); padding: 20px; }
+        /* Hero Alanı: Flex Row (Yan yana) ve boşluklar ayarlandı */
+        .hero { 
+            padding: 100px 40px 60px; 
+            display: flex; 
+            flex-direction: row; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 60px; /* Metin ve logo arasındaki boşluk */
+            background: radial-gradient(circle at center, #111 0%, #080808 100%); 
+        }
+
+        /* Sağ Taraf: Metin Kutusu (Logo sola geçince metin sağda kaldı) */
+        .hero-text {
+            text-align: left;
+            max-width: 500px;
+        }
+
+        .hero-text h1 { font-size: 3.5rem; font-weight: 800; background: linear-gradient(90deg, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px; line-height: 1.1; }
+        .hero-text p { color: #888; font-size: 1.1rem; }
         
-        /* Ana Logo Stili */
+        /* Sol Taraf: Ana Logo Stili ve Animasyonu */
+        .hero-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .brand-logo { 
-            width: 120px; 
-            height: 120px; 
-            border-radius: 30px; 
-            margin-bottom: 25px; 
+            width: 140px; 
+            height: 140px; 
+            border-radius: 35px; 
             border: 2px solid #222;
             box-shadow: 0 15px 40px rgba(0,0,0,0.6);
             transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             object-fit: cover;
+            animation: float 4s ease-in-out infinite; /* Süzülme animasyonu */
         }
+        
         .brand-logo:hover {
             transform: scale(1.08) rotate(2deg);
             border-color: #444;
             box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            animation-play-state: paused; /* Üzerine gelince süzülme dursun */
         }
 
-        h1 { font-size: 4rem; font-weight: 800; background: linear-gradient(90deg, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
-        .hero p { color: #888; font-size: 1.2rem; max-width: 600px; }
-        
+        /* Süzülme (Floating) Animasyonu Keyframes */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Mobil Uyumluluk (Telefonlarda alt alta ortalanmış tasarıma döner) */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column; /* HTML sırasına göre logo üstte, yazı altta kalır */
+                text-align: center;
+                padding: 60px 20px 40px;
+                gap: 30px;
+            }
+            .hero-text {
+                text-align: center;
+            }
+            .hero-text h1 { font-size: 2.8rem; }
+        }
+
         .projects { padding: 60px 20px; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
         
         .card { background: #111; border: 1px solid #222; border-radius: 24px; padding: 35px; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-decoration: none; color: white; position: relative; display: flex; flex-direction: column; }
@@ -66,10 +110,13 @@
 </head>
 <body>
     <section class="hero">
-        <img src="assets/byonthecode_icon2.png" alt="BYOnTheGo Studio Logo" class="brand-logo">
-        
-        <h1>BYOnTheGo</h1>
-        <p>Gelecek nesil veri analizi ve otomasyon araçları. Güvenli, hızlı ve kullanıcı odaklı.</p>
+        <div class="hero-image">
+            <img src="assets/byonthecode_icon2.png" alt="BYOnTheGo Studio Logo" class="brand-logo">
+        </div>
+        <div class="hero-text">
+            <h1>BYOnTheGo</h1>
+            <p>Gelecek nesil veri analizi ve otomasyon araçları.<br>Güvenli, hızlı ve kullanıcı odaklı.</p>
+        </div>
     </section>
 
     <div class="projects">
