@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
         body { background-color: #080808; color: white; line-height: 1.6; }
         
         /* Navbar */
@@ -16,30 +17,44 @@
         .back-link:hover { color: white; }
 
         /* Hero Section */
-        .hero { padding: 80px 20px; text-align: center; background: radial-gradient(circle at top, #05101a 0%, #080808 100%); border-bottom: 1px solid #111; }
+        .hero { padding: 60px 20px 80px; text-align: center; background: radial-gradient(circle at top, #05101a 0%, #080808 100%); border-bottom: 1px solid #111; }
         .badge { display: inline-block; padding: 5px 15px; border-radius: 50px; background: rgba(0, 149, 246, 0.1); color: #0095f6; font-size: 0.8rem; font-weight: 700; margin-bottom: 20px; border: 1px solid rgba(0, 149, 246, 0.2); letter-spacing: 1px; }
         .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -1px; }
         .hero span { color: #0095f6; }
-        .hero p { color: #aaa; font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px; }
+        .hero p { color: #aaa; font-size: 1.2rem; max-width: 700px; margin: 0 auto 30px; }
 
         /* CTA Buttons */
-        .cta-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .cta-group { display: flex; justify-content: center; margin-bottom: 50px; }
         .btn { padding: 16px 32px; border-radius: 12px; font-weight: 700; text-decoration: none; transition: 0.3s; font-size: 1rem; display: flex; align-items: center; gap: 10px; }
         .btn-primary { background-color: #0095f6; color: white; box-shadow: 0 10px 20px rgba(0, 149, 246, 0.2); }
         .btn-primary:hover { background-color: #1aa1f7; transform: translateY(-3px); }
-        .btn-secondary { background-color: #1a1a1a; color: white; border: 1px solid #333; }
-        .btn-secondary:hover { background-color: #222; border-color: #444; }
+
+        /* Hero Purchase Section */
+        .hero-purchase { max-width: 800px; margin: 0 auto; }
+        .hero-purchase h2 { font-size: 1.5rem; color: #fff; margin-bottom: 20px; font-weight: 800; }
+        .purchase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .p-card { background: rgba(17, 17, 17, 0.7); border: 1px solid #333; border-radius: 20px; padding: 25px 20px; text-align: center; transition: 0.3s; display: flex; flex-direction: column; backdrop-filter: blur(5px); }
+        .p-card:hover { border-color: #555; background: #151515; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .p-card h3 { font-size: 1.3rem; margin-bottom: 10px; color: #fff; }
+        .p-card p { color: #aaa; font-size: 0.9rem; margin-bottom: 20px; flex-grow: 1; line-height: 1.5; }
+        .p-badge { display: inline-block; padding: 4px 10px; background: rgba(0, 149, 246, 0.1); color: #0095f6; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-bottom: 12px; border: 1px solid rgba(0, 149, 246, 0.2); }
+        .p-badge.ig-badge { background: rgba(220, 39, 67, 0.1); color: #dc2743; border: 1px solid rgba(220, 39, 67, 0.2); }
+        
+        .btn-shopier { background-color: #0095f6; color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 700; text-decoration: none; display: block; transition: 0.3s; font-size: 0.95rem; }
+        .btn-shopier:hover { background-color: #1aa1f7; }
+        .btn-ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 700; text-decoration: none; display: block; transition: 0.3s; font-size: 0.95rem; }
+        .btn-ig:hover { opacity: 0.9; }
 
         /* Features Section */
         .section-title { text-align: center; padding: 60px 20px 20px; font-size: 2rem; font-weight: 800; }
-        .features { padding: 40px 20px 80px; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .features { padding: 20px 20px 60px; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .f-card { padding: 35px; background: #111; border-radius: 24px; border: 1px solid #222; transition: 0.3s; }
         .f-card:hover { border-color: #333; background: #141414; }
         .f-card h3 { font-size: 1.4rem; margin-bottom: 15px; color: #0095f6; }
         .f-card p { color: #888; font-size: 0.95rem; }
 
         /* Security Box */
-        .safety-container { padding: 60px 20px; max-width: 900px; margin: 0 auto; }
+        .safety-container { padding: 20px 20px 60px; max-width: 900px; margin: 0 auto; }
         .safety-box { padding: 40px; background: linear-gradient(145deg, #0d0d0d 0%, #111 100%); border: 1px solid #222; border-radius: 30px; text-align: center; position: relative; overflow: hidden; }
         .safety-box::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #0095f6, #00f2ea); }
         .safety-box h4 { color: #fff; font-size: 1.5rem; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 10px; }
@@ -59,16 +74,33 @@
     </nav>
 
     <section class="hero">
-        <span class="badge">ÇOK YAKINDA</span>
+        <span class="badge">ŞİMDİ YAYINDA</span>
         <h1>InstaSafe <span>Pro</span></h1>
         <p>Instagram kitlenizi şifre paylaşmadan, güvenli ve hızlı bir şekilde analiz edin. Sizi takip etmeyenleri ve profilinizin sağlığını saniyeler içinde keşfedin.</p>
         
         <div class="cta-group">
-            <a href="#" class="btn btn-primary">
+            <a href="https://chromewebstore.google.com/detail/cifinonghioepdpcgpphcegmdngfgiok?utm_source=item-share-cb" target="_blank" class="btn btn-primary">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                Mağazada İncele
+                Chrome'a Ekle
             </a>
-            <a href="#" class="btn btn-secondary">Lisans Satın Al</a>
+        </div>
+
+        <div class="hero-purchase">
+            <h2>Lisans Seçenekleri</h2>
+            <div class="purchase-grid">
+                <div class="p-card">
+                    <div><span class="p-badge">Shopier</span></div>
+                    <h3>Kredi Kartı / Banka Kartı</h3>
+                    <p>Ödemenizi tamamladıktan sonra lisans kodunuz e-posta adresinize iletilecektir.</p>
+                    <a href="https://www.shopier.com/byonthecode/46878350" target="_blank" class="btn-shopier">Shopier ile Satın Al</a>
+                </div>
+                <div class="p-card">
+                    <div><span class="p-badge ig-badge">Manuel İşlem</span></div>
+                    <h3>Havale / EFT</h3>
+                    <p>Instagram DM üzerinden bizimle iletişime geçerek lisansınızı teslim alabilirsiniz.</p>
+                    <a href="https://www.instagram.com/byonthego/" target="_blank" class="btn-ig">Instagram'dan Ulaş</a>
+                </div>
+            </div>
         </div>
     </section>
 
