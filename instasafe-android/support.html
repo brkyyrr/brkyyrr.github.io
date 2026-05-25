@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Support | InstaSafe Pro</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background-color: #141314; color: white; line-height: 1.6; }
+        
+        body.lang-tr .en-content { display: none !important; }
+        body.lang-en .tr-content { display: none !important; }
+
+        nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #242224; background: #0d0c0d; }
+        .logo { font-weight: 800; font-size: 1.5rem; text-decoration: none; color: white; }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .back-link { text-decoration: none; color: #888; font-size: 0.9rem; transition: 0.3s; }
+        .back-link:hover { color: white; }
+        .lang-btn { background: #242224; border: 1px solid #3d3a3d; color: white; padding: 6px 14px; border-radius: 50px; cursor: pointer; font-weight: 600; font-size: 0.8rem; }
+        .lang-btn:hover { background: white; color: black; }
+
+        .form-container { max-width: 550px; margin: 50px auto; padding: 40px 30px; background: #242224; border: 1px solid #363436; border-radius: 24px; box-shadow: 0 15px 40px rgba(0,0,0,0.5); }
+        .form-title { text-align: center; font-size: 2.2rem; font-weight: 800; margin-bottom: 5px; color: white; }
+        .form-divider { width: 100%; height: 2px; background: linear-gradient(90deg, #ff4b6b, #dc2743); margin: 15px 0 30px; border-radius: 2px; }
+
+        .form-group { margin-bottom: 22px; display: flex; flex-direction: column; }
+        label { font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; color: #ccc; }
+        
+        input[type="text"], input[type="email"], textarea { background: #161516; border: 1px solid #3d3a3d; border-radius: 12px; padding: 14px 16px; color: white; font-size: 1rem; font-weight: 500; transition: 0.3s; width: 100%; }
+        input:focus, textarea:focus { border-color: #ff4b6b; outline: none; background: #1a191a; box-shadow: 0 0 10px rgba(220, 39, 67, 0.15); }
+
+        /* Sürükle-Bırak Drag & Drop Kutusu */
+        .file-dropzone { border: 2px dashed #4d494d; border-radius: 14px; padding: 30px 20px; text-align: center; background: #161516; cursor: pointer; transition: 0.3s; position: relative; }
+        .file-dropzone:hover, .file-dropzone.dragover { border-color: #ff4b6b; background: #1d1718; }
+        .file-icon { font-size: 1.8rem; margin-bottom: 10px; display: block; color: #aaa; }
+        .file-dropzone p { font-size: 0.9rem; color: #ccc; font-weight: 600; }
+        .file-dropzone span { font-size: 0.75rem; color: #777; margin-top: 5px; display: block; }
+        #file-input { display: none; }
+        .file-list { margin-top: 10px; font-size: 0.85rem; color: #ff4b6b; font-weight: 600; text-align: left; }
+
+        /* Gönder Butonu */
+        .submit-btn { width: 100%; padding: 16px; background: #0095f6; color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(0, 149, 246, 0.2); margin-top: 10px; }
+        .submit-btn:hover { background: #1aa1f7; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 149, 246, 0.4); }
+
+        footer { text-align: center; padding: 40px 20px; color: #555; font-size: 0.85rem; }
+    </style>
+</head>
+<body class="lang-tr">
+
+    <nav>
+        <a href="index.html" class="logo">InstaSafe Pro</a>
+        <div class="nav-right">
+            <a href="index.html" class="back-link tr-content">&larr; Uygulama Sayfasına Dön</a>
+            <a href="index.html" class="back-link en-content">&larr; Back to App Main</a>
+            <button class="lang-btn" id="lang-toggle" onclick="toggleLanguage()">EN</button>
+        </div>
+    </nav>
+
+    <div class="form-container">
+        <h1 class="form-title tr-content">Destek Talebi</h1>
+        <h1 class="form-title en-content">Contact support</h1>
+        <div class="form-divider"></div>
+
+        <form onsubmit="alert('Teknik Simülasyon: Form verileri ve eklenen görseller Firebase Storage entegrasyonu kurulduğunda panelinize düşecektir.'); return false;">
+            
+            <div class="form-group">
+                <label class="tr-content" for="name">Adınız Soyadınız</label>
+                <label class="en-content" for="name">Full name</label>
+                <input type="text" id="name" required placeholder="Adınız Soyadınız">
+            </div>
+
+            <div class="form-group">
+                <label class="tr-content" for="email">E-posta Adresiniz</label>
+                <label class="en-content" for="email">Email</label>
+                <input type="email" id="email" required placeholder="ornek@eposta.com">
+            </div>
+
+            <div class="form-group">
+                <label class="tr-content" for="subject">Konu</label>
+                <label class="en-content" for="subject">Subject</label>
+                <input type="text" id="subject" readonly value="InstaSafe Pro - Mobil Destek Talebi">
+            </div>
+
+            <div class="form-group">
+                <label class="tr-content" for="message">Talebinizi Açıklayın</label>
+                <label class="en-content" for="message">Describe your request:</label>
+                <textarea id="message" rows="5" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="tr-content">Ek Dosyalar (İsteğe Bağlı)</label>
+                <label class="en-content">Attachments (optional)</label>
+                <p style="font-size:0.8rem; color:#666; margin-top:-5px; margin-bottom:10px;" class="tr-content">En fazla 5 MB görsel · En fazla 50 MB video</p>
+                <p style="font-size:0.8rem; color:#666; margin-top:-5px; margin-bottom:10px;" class="en-content">Images up to 5 MB · Videos up to 500 MB</p>
+                
+                <div class="file-dropzone" id="dropzone" onclick="document.getElementById('file-input').click()">
+                    <span class="file-icon">📁</span>
+                    <p class="tr-content">Dosyaları buraya sürükleyin veya tıklayın</p>
+                    <p class="en-content">Click or drag files here</p>
+                    <span class="tr-content">Görsel (JPG, PNG, GIF, WEBP) ve video (MP4, MOV, AVI)</span>
+                    <span class="en-content">Images (JPG, PNG, GIF, WEBP) and videos (MP4, MOV, AVI)</span>
+                    <input type="file" id="file-input" multiple onchange="handleFiles(this.files)">
+                    <div class="file-list" id="file-list"></div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn tr-content">Gönder</button>
+            <button type="submit" class="submit-btn en-content">Sent</button>
+        </form>
+    </div>
+
+    <footer>
+        BYOnTheGo Software Studio &copy; 2026.
+    </footer>
+
+    <script>
+        function toggleLanguage() {
+            const body = document.body;
+            const btn = document.getElementById('lang-toggle');
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const subjectInput = document.getElementById('subject');
+
+            if (body.classList.contains('lang-tr')) {
+                body.classList.remove('lang-tr');
+                body.classList.add('lang-en');
+                btn.innerText = 'TR';
+                localStorage.setItem('instasafe-lang', 'en');
+                subjectInput.value = "InstaSafe Pro - Mobile Support Request";
+                nameInput.placeholder = "Your Full Name";
+                emailInput.placeholder = "example@email.com";
+            } else {
+                body.classList.remove('lang-en');
+                body.classList.add('lang-tr');
+                btn.innerText = 'EN';
+                localStorage.setItem('instasafe-lang', 'tr');
+                subjectInput.value = "InstaSafe Pro - Mobil Destek Talebi";
+                nameInput.placeholder = "Adınız Soyadınız";
+                emailInput.placeholder = "ornek@eposta.com";
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('instasafe-lang') || 'tr';
+            document.body.className = 'lang-' + savedLang;
+            document.getElementById('lang-toggle').innerText = savedLang === 'tr' ? 'EN' : 'TR';
+            
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const subjectInput = document.getElementById('subject');
+            
+            if (savedLang === 'tr') {
+                subjectInput.value = "InstaSafe Pro - Mobil Destek Talebi";
+                nameInput.placeholder = "Adınız Soyadınız";
+                emailInput.placeholder = "ornek@eposta.com";
+            } else {
+                subjectInput.value = "InstaSafe Pro - Mobile Support Request";
+                nameInput.placeholder = "Your Full Name";
+                emailInput.placeholder = "example@email.com";
+            }
+        });
+
+        const dropzone = document.getElementById('dropzone');
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropzone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                dropzone.classList.add('dragover');
+            }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropzone.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                dropzone.classList.remove('dragover');
+            }, false);
+        });
+
+        dropzone.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles(files);
+        }, false);
+
+        function handleFiles(files) {
+            const fileList = document.getElementById('file-list');
+            fileList.innerHTML = "";
+            if(files.length > 0) {
+                fileList.innerHTML = "📎 " + Array.from(files).map(f => f.name).join(', ');
+            }
+        }
+    </script>
+</body>
+</html>

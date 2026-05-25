@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstaSafe Pro | Mobile Platform</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: #141314; color: white; line-height: 1.6; transition: 0.3s; }
+        
+        /* Dil Seçenekleri Dinamik Kontrolü */
+        body.lang-tr .en-content { display: none !important; }
+        body.lang-en .tr-content { display: none !important; }
+
+        /* Navbar */
+        nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #242224; background: #0d0c0d; }
+        .logo { font-weight: 800; font-size: 1.5rem; text-decoration: none; color: white; }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .back-link { text-decoration: none; color: #888; font-size: 0.9rem; transition: 0.3s; }
+        .back-link:hover { color: white; }
+        .lang-btn { background: #242224; border: 1px solid #3d3a3d; color: white; padding: 6px 14px; border-radius: 50px; cursor: pointer; font-weight: 600; font-size: 0.8rem; transition: 0.3s; }
+        .lang-btn:hover { background: white; color: black; border-color: white; }
+
+        /* Hero Bölümü (Dikey Genişlik Daraltıldı ve Optimize Edildi) */
+        .hero { padding: 55px 20px 50px; text-align: center; background: radial-gradient(circle at top, #3a1c21 0%, #141314 100%); border-bottom: 1px solid #242224; }
+        .app-logo { width: 110px; height: 110px; border-radius: 28px; margin-bottom: 20px; border: 2px solid #3d3a3d; box-shadow: 0 15px 40px rgba(0,0,0,0.6); background-color: #242224; }
+        .badge { display: inline-block; padding: 5px 16px; border-radius: 50px; background: rgba(220, 39, 67, 0.1); color: #ff4b6b; font-size: 0.75rem; font-weight: 800; margin-bottom: 18px; border: 1px solid rgba(220, 39, 67, 0.2); letter-spacing: 1.5px; }
+        .hero h1 { font-size: 3.2rem; font-weight: 800; margin-bottom: 15px; letter-spacing: -1px; }
+        .hero span { color: #ff4b6b; background: linear-gradient(90deg, #ff4b6b, #dc2743); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { color: #aaa; font-size: 1.15rem; max-width: 680px; margin: 0 auto 30px; }
+
+        /* Profesyonel Google Play Mağaza Butonu */
+        .play-store-btn { display: inline-flex; align-items: center; gap: 14px; background: #000000; border: 1px solid #a6a6a6; padding: 10px 24px; border-radius: 10px; text-decoration: none; color: white; transition: 0.25s ease; box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
+        .play-store-btn:hover { border-color: #ff4b6b; transform: translateY(-2px); box-shadow: 0 12px 25px rgba(220, 39, 67, 0.2); }
+        .play-store-btn .btn-text { text-align: left; display: flex; flex-direction: column; line-height: 1.2; }
+        .play-store-btn .btn-text .top-txt { font-size: 0.65rem; color: #fff; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; }
+        .play-store-btn .btn-text .main-txt { font-size: 1.2rem; font-weight: 700; font-family: system-ui, -apple-system, sans-serif; letter-spacing: -0.2px; margin-top: 1px; }
+
+        /* Mimari Güvenlik Kutusu (Yasal Kartların Üzerine Taşındı) */
+        .safety-container { padding: 50px 20px 20px; max-width: 900px; margin: 0 auto; }
+        .safety-box { padding: 35px 40px; background: #242224; border: 1px solid #363436; border-radius: 24px; text-align: center; position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .safety-box::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #ff4b6b, #dc2743); }
+        .safety-box h4 { color: #fff; font-size: 1.4rem; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 700; }
+        .safety-box p { color: #b3b3b3; font-size: 0.98rem; line-height: 1.7; }
+
+        /* Doküman Kartları Bölümü */
+        .links-container { padding: 15px 20px 40px; max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .l-card { padding: 30px; background: #242224; border-radius: 20px; border: 1px solid #363436; transition: 0.3s; text-decoration: none; color: white; display: flex; flex-direction: column; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+        .l-card:hover { border-color: #ff4b6b; background: #2b292b; transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.4); }
+        .l-card h3 { font-size: 1.25rem; margin-bottom: 10px; font-weight: 700; transition: 0.3s; color: white; }
+        .l-card:hover h3 { color: #ff4b6b; }
+        .l-card p { color: #aaa; font-size: 0.95rem; flex-grow: 1; line-height: 1.5; }
+        .arrow { margin-top: 15px; font-weight: bold; color: #ff4b6b; transition: 0.3s; }
+        .l-card:hover .arrow { transform: translateX(5px); }
+
+        /* Destek Yönlendirme Alanı (Form Yerine Gelen Yeni Bölüm) */
+        .support-cta-section { padding: 30px 20px 70px; text-align: center; max-width: 900px; margin: 0 auto; }
+        .support-cta-box { padding: 35px; background: linear-gradient(135deg, #1a191a 0%, #242224 100%); border: 1px solid #363436; border-radius: 24px; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        .support-cta-box h3 { font-size: 1.5rem; font-weight: 700; }
+        .support-cta-box p { color: #aaa; max-width: 500px; font-size: 0.95rem; }
+        .support-btn { display: inline-flex; align-items: center; padding: 12px 32px; background: #ff4b6b; color: white; font-weight: 700; text-decoration: none; border-radius: 12px; transition: 0.3s; box-shadow: 0 5px 15px rgba(220, 39, 67, 0.2); }
+        .support-btn:hover { background: #dc2743; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(220, 39, 67, 0.4); }
+
+        /* Footer */
+        footer { text-align: center; padding: 60px 20px 80px; border-top: 1px solid #242224; color: #666; font-size: 0.85rem; background: #0d0c0d; }
+    </style>
+</head>
+<body class="lang-tr">
+
+    <nav>
+        <a href="../index.html" class="logo">BYOnTheGo</a>
+        <div class="nav-right">
+            <a href="../index.html" class="back-link tr-content">&larr; Ana Sayfa</a>
+            <a href="../index.html" class="back-link en-content">&larr; Home Hub</a>
+            <button class="lang-btn" id="lang-toggle" onclick="toggleLanguage()">EN</button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <img src="../assets/logo_2.png" alt="InstaSafe Pro Mobile Logo" class="app-logo">
+        <div>
+            <span class="badge">MOBILE</span>
+        </div>
+        <h1>InstaSafe <span>Pro</span> Mobile</h1>
+        <p class="tr-content">Instagram kitlenizi mobil cihazınızdan, tamamen şifresiz, güvenli ve kriptolanmış yerel veri tabanı mimarisiyle saniyeler içinde analiz edin.</p>
+        <p class="en-content">Analyze your Instagram audience from your mobile device safely, without password sharing, built entirely on encrypted local database architecture.</p>
+        
+        <a href="https://play.google.com/store" target="_blank" class="play-store-btn">
+            <svg width="22" height="22" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" style="display: block;"><path fill="#4285F4" d="M48.1,23.3c-2.4,2.5-3.8,6.3-3.8,11v443.4c0,4.7,1.4,8.5,3.8,11l2.5,2.5L277.1,264v-16L50.6,20.8L48.1,23.3z"/><path fill="#00C0A8" d="M352.7,339.7l-75.6-75.6V248l75.6-75.6l2.1,1.2l89.6,51c25.6,14.6,25.6,38.4,0,53L354.8,338.5L352.7,339.7z"/><path fill="#FF3A44" d="M277.1,264L50.6,490.5c7.9,8.4,21,9.4,35.6,1.1l266.5-151.9L277.1,264z"/><path fill="#00E676" d="M277.1,248L86.2,20.4c-14.6-8.3-27.7-7.3-35.6,1.1L277.1,248z"/></svg>
+            <div class="btn-text">
+                <span class="top-txt en-content">Get it on</span>
+                <span class="top-txt tr-content">İNDİRİN</span>
+                <span class="main-txt">Google Play</span>
+            </div>
+        </a>
+    </section>
+
+    <div class="safety-container">
+        <div class="safety-box">
+            <h4 class="tr-content">🔐 Güvenlik Odaklı Mimari</h4>
+            <h4 class="en-content">🔐 Privacy-First Architecture</h4>
+            <p class="tr-content">InstaSafe Pro, verilerinizin gizliliğini en üst düzeyde tutar. Analiz edilen hiçbir veri uzak sunuculara veya veritabanlarına kaydedilmez. Tüm süreç tamamen mobil uygulamanızda ve cihazınızın yerel şifreli belleğinde gerçekleşir.</p>
+            <p class="en-content">InstaSafe Pro preserves your data privacy at the highest level. No analyzed records are transmitted to remote cloud databases. All analytics operations execute securely inside your mobile application and its isolated local encrypted storage.</p>
+        </div>
+    </div>
+
+    <div class="links-container">
+        <a href="aydinlatma.html" class="l-card">
+            <h3 class="tr-content">🛡️ Aydınlatma Metni</h3>
+            <h3 class="en-content">🛡️ Disclosure Text</h3>
+            <p class="tr-content">Uygulama içi güvenli kullanım, KVKK/GDPR süreçleri ve cihaz içi veri şifreleme yapılandırması.</p>
+            <p class="en-content">In-app secure usage, KVKK/GDPR terms, and on-device encryption configurations.</p>
+            <div class="arrow">&rarr;</div>
+        </a>
+
+        <a href="privacy-policy.html" class="l-card">
+            <h3 class="tr-content">📄 Gizlilik Politikası</h3>
+            <h3 class="en-content">📄 Privacy Policy</h3>
+            <p class="tr-content">Google Play Console mülakatları ile tam uyumlu evrensel gizlilik politikası metni.</p>
+            <p class="en-content">Universal privacy policy text fully compliant with Google Play Store review developer terms.</p>
+            <div class="arrow">&rarr;</div>
+        </a>
+    </div>
+
+    <section class="support-cta-section">
+        <div class="support-cta-box">
+            <h3 class="tr-content">✉️ Teknik Desteğe mi İhtiyacınız Var?</h3>
+            <h3 class="en-content">✉️ Need Technical Support?</h3>
+            <p class="tr-content">Uygulamayla ilgili soru, hata bildirimi veya taleplerinizi ekran görüntüsü ekleyerek bize iletebilirsiniz.</p>
+            <p class="en-content">You can submit your questions, bug reports, or requests regarding the app along with screenshots.</p>
+            <a href="support.html" class="support-btn tr-content">Destek Talebi Oluştur</a>
+            <a href="support.html" class="support-btn en-content">Create Support Ticket</a>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 BYOnTheGo Software Studio. Tüm hakları saklıdır.
+    </footer>
+
+    <script>
+        function toggleLanguage() {
+            const body = document.body;
+            const btn = document.getElementById('lang-toggle');
+            if (body.classList.contains('lang-tr')) {
+                body.classList.remove('lang-tr');
+                body.classList.add('lang-en');
+                btn.innerText = 'TR';
+                localStorage.setItem('instasafe-lang', 'en');
+            } else {
+                body.classList.remove('lang-en');
+                body.classList.add('lang-tr');
+                btn.innerText = 'EN';
+                localStorage.setItem('instasafe-lang', 'tr');
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('instasafe-lang') || 'tr';
+            document.body.className = 'lang-' + savedLang;
+            document.getElementById('lang-toggle').innerText = savedLang === 'tr' ? 'EN' : 'TR';
+        });
+    </script>
+</body>
+</html>

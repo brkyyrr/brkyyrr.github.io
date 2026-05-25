@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclosure Text | InstaSafe Pro</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background-color: #080808; color: white; line-height: 1.7; }
+        
+        body.lang-tr .en-content { display: none !important; }
+        body.lang-en .tr-content { display: none !important; }
+
+        nav { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1a1a1a; }
+        .logo { font-weight: 800; font-size: 1.5rem; text-decoration: none; color: white; }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .back-link { text-decoration: none; color: #888; font-size: 0.9rem; transition: 0.3s; }
+        .back-link:hover { color: white; }
+        .lang-btn { background: #1a1a1a; border: 1px solid #333; color: white; padding: 6px 14px; border-radius: 50px; cursor: pointer; font-weight: 600; font-size: 0.8rem; }
+        .lang-btn:hover { background: white; color: black; }
+
+        .content-container { max-width: 800px; margin: 60px auto; padding: 20px; background: #111; border: 1px solid #222; border-radius: 24px; box-shadow: 0 15px 40px rgba(0,0,0,0.5); }
+        h1 { font-size: 1.8rem; font-weight: 800; margin-bottom: 25px; color: #fff; border-bottom: 1px solid #222; padding-bottom: 15px; }
+        .greeting { font-weight: 700; font-size: 1.1rem; color: #fff; margin-bottom: 15px; display: block; }
+        p { color: #ccc; margin-bottom: 20px; font-size: 1rem; }
+        ul { margin-left: 20px; margin-bottom: 25px; color: #ccc; list-style-type: square; }
+        li { margin-bottom: 15px; font-size: 0.95rem; }
+        li strong { color: #a4c639; }
+        
+        .mock-btn { display: block; width: 100%; max-width: 350px; margin: 30px auto 10px; padding: 15px; background: #a4c639; color: black; text-align: center; border-radius: 12px; font-weight: 800; text-decoration: none; font-size: 1rem; box-shadow: 0 5px 15px rgba(164, 198, 57, 0.3); transition: 0.3s; }
+        .mock-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(164, 198, 57, 0.5); }
+        
+        footer { text-align: center; padding: 40px 20px; color: #555; font-size: 0.85rem; }
+    </style>
+</head>
+<body class="lang-tr">
+
+    <nav>
+        <a href="index.html" class="logo">InstaSafe Pro</a>
+        <div class="nav-right">
+            <a href="index.html" class="back-link tr-content">&larr; Uygulama Sayfasına Dön</a>
+            <a href="index.html" class="back-link en-content">&larr; Back to App Main</a>
+            <button class="lang-btn" id="lang-toggle" onclick="toggleLanguage()">EN</button>
+        </div>
+    </nav>
+
+    <div class="content-container tr-content">
+        <h1>🛡️ InstaSafe Pro: Güvenli Kullanım ve Aydınlatma Metni</h1>
+        <span class="greeting">Değerli Kullanıcımız,</span>
+        <p>InstaSafe Pro, Instagram hesabınızın takipçi ve takipten çıkan analizi süreçlerini tamamen yerel (cihaz içi) olarak yürüten bağımsız bir analiz aracıdır. Hesap güvenliğiniz ve veri gizliliğiniz bizim için en yüksek önceliktir. Uygulamayı kullanmaya başlamadan önce lütfen aşağıdaki yasal ve teknik bilgilendirmeyi dikkatlice okuyunuz:</p>
+        
+        <ul>
+            <li><strong>Veri Gizliliği ve Yerel Depolama (KVKK / GDPR):</strong> Giriş esnasında oluşan oturum çerezleri (cookies) ve analiz edilen kullanıcı listeleri, kesinlikle hiçbir uzak sunucuya aktarılmaz, üçüncü şahıslarla paylaşılmaz ve satılmaz. Tüm verileriniz, cihazınızın güvenli hafızasında (EncryptedSharedPreferences ve yerel SQLite veritabanı) kriptolanarak şifreli olarak saklanır.</li>
+            <li><strong>Hizmet Kapsamı:</strong> Bu uygulama yalnızca profilinizin takipçi dinamiklerini analiz etmenizi ve kendi rızanızla takipten çıkma (unfollow) işlemlerini yönetmenizi sağlar. Uygulamamız kesinlikle takipçi artırma, takipçi satışı, beğeni veya bot hesabı sağlama hizmeti sunmaz; bu yöndeki talepler işleme alınmaz.</li>
+            <li><strong>Güvenli Analiz Sıklığı:</strong> Instagram algoritmalarının bot ve sıra dışı hareket korumalarına takılmamak adına, günde 3-4 defadan fazla tam analiz yapmamanızı ve işlemlerinizi uygulamanın sunduğu günlük limitler dahilinde yürütmenizi tavsiye ederiz.</li>
+            <li><strong>Oturum Yönetimi:</strong> Uygulamadan her çıkışınızda "Çıkış Yap" butonunu kullanmanıza gerek yoktur. Geri tuşuyla uygulamayı kapattığınızda sistem cihazınızı "Tanıdık Cihaz" olarak hatırlar ve her seferinde yeni giriş güvenlik mailleri almanızı engeller.</li>
+        </ul>
+        <p>"Devam Et" butonuna basarak, InstaSafe Pro'nun Kullanım Koşullarını ve yasal Gizlilik Politikasını okuduğunuzu, verilerinizin cihaz içinde şifreli olarak işlenmesini açıkça onayladığınızı (Açık Rıza) beyan etmiş olursunuz.</p>
+        
+        <a href="#" class="mock-btn" onclick="alert('Bu sayfa aydınlatma metninin web sürümüdür. Uygulama içinde bu buton aktif olarak çalışacaktır.'); return false;">Okudum, Onaylıyorum ve Devam Et</a>
+    </div>
+
+    <div class="content-container en-content">
+        <h1>🛡️ InstaSafe Pro: Secure Use and Disclosure Text</h1>
+        <span class="greeting">Dear User,</span>
+        <p>InstaSafe Pro is an independent analysis tool that performs your Instagram account's follower and unfollower analysis processes completely locally (on-device). Your account security and data privacy are our highest priorities. Before using the application, please read the following legal and technical notice carefully:</p>
+        
+        <ul>
+            <li><strong>Data Privacy and Local Storage (KVKK / GDPR):</strong> Session cookies generated during login and analyzed user lists are absolutely never transferred to any remote server, shared with third parties, or sold. All your data is encrypted and stored securely in your device's private memory (EncryptedSharedPreferences and local SQLite database).</li>
+            <li><strong>Scope of Service:</strong> This application only allows you to analyze your profile's follower dynamics and manage unfollow actions with your own consent. Our application definitely does not provide artificial follower growth, follower sales, likes, or bot accounts; requests in this direction will not be processed.</li>
+            <li><strong>Safe Analysis Frequency:</strong> In order not to trigger Instagram algorithms' bot and unusual activity protections, we recommend that you do not perform full analysis more than 3-4 times a day and manage your actions within the daily limits provided by the application.</li>
+            <li><strong>Session Management:</strong> You do not need to use the "Log Out" button every time you exit the application. When you close the app using the back button, the system remembers your device as a "Familiar Device" and prevents you from receiving new login security emails every time.</li>
+        </ul>
+        <p>By clicking the "Continue" button, you declare that you have read the Terms of Use and legal Privacy Policy of InstaSafe Pro, and that you explicitly consent (Explicit Consent) to the processing of your data in an encrypted manner within the device.</p>
+        
+        <a href="#" class="mock-btn" onclick="alert('This is the web preview of the dialog. The button will function seamlessly inside the mobile app WebView.'); return false;">Read, Approved and Continue</a>
+    </div>
+
+    <footer>
+        BYOnTheGo Software Studio &copy; 2026.
+    </footer>
+
+    <script>
+        function toggleLanguage() {
+            const body = document.body;
+            const btn = document.getElementById('lang-toggle');
+            if (body.classList.contains('lang-tr')) {
+                body.classList.remove('lang-tr');
+                body.classList.add('lang-en');
+                btn.innerText = 'TR';
+                localStorage.setItem('instasafe-lang', 'en');
+            } else {
+                body.classList.remove('lang-en');
+                body.classList.add('lang-tr');
+                btn.innerText = 'EN';
+                localStorage.setItem('instasafe-lang', 'tr');
+            }
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('instasafe-lang') || 'tr';
+            document.body.className = 'lang-' + savedLang;
+            document.getElementById('lang-toggle').innerText = savedLang === 'tr' ? 'EN' : 'TR';
+        });
+    </script>
+</body>
+</html>
