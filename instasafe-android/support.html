@@ -30,15 +30,6 @@
         input[type="text"], input[type="email"], textarea { background: #161516; border: 1px solid #3d3a3d; border-radius: 12px; padding: 14px 16px; color: white; font-size: 1rem; font-weight: 500; transition: 0.3s; width: 100%; }
         input:focus, textarea:focus { border-color: #ff4b6b; outline: none; background: #1a191a; box-shadow: 0 0 10px rgba(220, 39, 67, 0.15); }
 
-        /* Sürükle-Bırak Drag & Drop Kutusu */
-        .file-dropzone { border: 2px dashed #4d494d; border-radius: 14px; padding: 30px 20px; text-align: center; background: #161516; cursor: pointer; transition: 0.3s; position: relative; }
-        .file-dropzone:hover, .file-dropzone.dragover { border-color: #ff4b6b; background: #1d1718; }
-        .file-icon { font-size: 1.8rem; margin-bottom: 10px; display: block; color: #aaa; }
-        .file-dropzone p { font-size: 0.9rem; color: #ccc; font-weight: 600; }
-        .file-dropzone span { font-size: 0.75rem; color: #777; margin-top: 5px; display: block; }
-        #file-input { display: none; }
-        .file-list { margin-top: 12px; font-size: 0.85rem; color: #ff4b6b; font-weight: 600; text-align: left; word-break: break-all; }
-
         /* Gönder Butonu */
         .submit-btn { width: 100%; padding: 16px; background: #0095f6; color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(0, 149, 246, 0.2); margin-top: 10px; }
         .submit-btn:hover:not(:disabled) { background: #1aa1f7; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 149, 246, 0.4); }
@@ -68,42 +59,25 @@
             <div class="form-group">
                 <label class="tr-content" for="name">Adınız Soyadınız</label>
                 <label class="en-content" for="name">Full name</label>
-                <input type="text" id="name" required placeholder="Adınız Soyadınız">
+                <input type="text" id="name" name="name" required placeholder="Adınız Soyadınız">
             </div>
 
             <div class="form-group">
                 <label class="tr-content" for="email">E-posta Adresiniz</label>
                 <label class="en-content" for="email">Email</label>
-                <input type="email" id="email" required placeholder="ornek@eposta.com">
+                <input type="email" id="email" name="email" required placeholder="ornek@eposta.com">
             </div>
 
             <div class="form-group">
                 <label class="tr-content" for="subject">Konu</label>
                 <label class="en-content" for="subject">Subject</label>
-                <input type="text" id="subject" readonly value="InstaSafe Pro - Mobil Destek Talebi">
+                <input type="text" id="subject" name="subject" readonly value="InstaSafe Pro - Mobil Destek Talebi">
             </div>
 
             <div class="form-group">
                 <label class="tr-content" for="message">Talebinizi Açıklayın</label>
                 <label class="en-content" for="message">Describe your request:</label>
-                <textarea id="message" rows="5" required></textarea>
-            </div>
-
-            <div class="form-group">
-                <label class="tr-content">Ek Dosyalar (İsteğe Bağlı)</label>
-                <label class="en-content">Attachments (optional)</label>
-                <p style="font-size:0.8rem; color:#666; margin-top:-5px; margin-bottom:10px;" class="tr-content">En fazla 25 MB dosya desteklenir (Görsel veya Video)</p>
-                <p style="font-size:0.8rem; color:#666; margin-top:-5px; margin-bottom:10px;" class="en-content">Maximum 25 MB file size supported (Image or Video)</p>
-                
-                <div class="file-dropzone" id="dropzone">
-                    <span class="file-icon">📁</span>
-                    <p class="tr-content">Dosyaları buraya sürükleyin veya tıklayın</p>
-                    <p class="en-content">Click or drag files here</p>
-                    <span class="tr-content">Görsel (JPG, PNG, GIF, WEBP) ve video (MP4, MOV, AVI)</span>
-                    <span class="en-content">Images (JPG, PNG, GIF, WEBP) and videos (MP4, MOV, AVI)</span>
-                    <input type="file" id="file-input" accept="image/*,video/*">
-                    <div class="file-list" id="file-list"></div>
-                </div>
+                <textarea id="message" name="message" rows="6" required></textarea>
             </div>
 
             <button type="submit" id="submit-btn" class="submit-btn">
@@ -117,27 +91,7 @@
         BYOnTheGo Software Studio &copy; 2026.
     </footer>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
-
-        // Senin Doğrulanmış Proje Ayarların (Ücretsiz Kalan Güvenli Dosya Deposu)
-        const firebaseConfig = {
-            apiKey: "AIzaSyDYQcB6wWqiIfYc-m3PgiVKMN1og74Blq8",
-            authDomain: "support-2e287.firebaseapp.com",
-            projectId: "support-2e287",
-            storageBucket: "support-2e287.firebasestorage.app",
-            messagingSenderId: "855107284742",
-            appId: "1:855107284742:web:32d16e2304bff8aed9b887",
-            measurementId: "G-E6EGQR897T"
-        };
-
-        // Firebase Depolamayı Başlat
-        const app = initializeApp(firebaseConfig);
-        const storage = getStorage(app);
-
-        let selectedFile = null;
-
+    <script>
         // Dil Değiştirme Arayüz Yönetimi
         const langBtn = document.getElementById('lang-toggle');
         const nameInput = document.getElementById('name');
@@ -166,68 +120,11 @@
             updatePlaceholders(currentLang);
         });
 
+        // Sayfa İlk Açıldığında Dili Hatırla
         const savedLang = localStorage.getItem('instasafe-lang') || 'tr';
         updatePlaceholders(savedLang);
 
-        // Sürükle-Bırak Dosya Kontrolleri ve Boyut Validasyonu
-        const dropzone = document.getElementById('dropzone');
-        const fileInput = document.getElementById('file-input');
-        const fileList = document.getElementById('file-list');
-
-        dropzone.addEventListener('click', () => fileInput.click());
-
-        ['dragenter', 'dragover'].forEach(eventName => {
-            dropzone.addEventListener(eventName, (e) => {
-                e.preventDefault();
-                dropzone.classList.add('dragover');
-            }, false);
-        });
-
-        ['dragleave', 'drop'].forEach(eventName => {
-            dropzone.addEventListener(eventName, (e) => {
-                e.preventDefault();
-                dropzone.classList.remove('dragover');
-            }, false);
-        });
-
-        dropzone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropzone.classList.remove('dragover');
-            if(e.dataTransfer.files.length > 0) {
-                handleFileValidation(e.dataTransfer.files[0]);
-            }
-        }, false);
-
-        fileInput.addEventListener('change', (e) => {
-            if(e.target.files.length > 0) {
-                handleFileValidation(e.target.files[0]);
-            }
-        });
-
-        function handleFileValidation(file) {
-            if (!file) return;
-
-            const isTr = document.body.classList.contains('lang-tr');
-            const fileSize = file.size;
-
-            // Maksimum 25 MB dosya kısıtlaması
-            if (fileSize > 25 * 1024 * 1024) {
-                alert(isTr ? "Hata: Dosya boyutu 25 MB'ı aşamaz!" : "Error: File size cannot exceed 25 MB!");
-                clearFileSelection();
-                return;
-            }
-
-            selectedFile = file;
-            fileList.innerHTML = `📎 ${file.name} (${(fileSize / (1024 * 1024)).toFixed(2)} MB)`;
-        }
-
-        function clearFileSelection() {
-            selectedFile = null;
-            fileInput.value = "";
-            fileList.innerHTML = "";
-        }
-
-        // Form Gönderme Adımı (Hibrit Akış)
+        // Form Gönderme ve Doğrudan Web3Forms API Akışı
         const form = document.getElementById('support-form');
         const submitBtn = document.getElementById('submit-btn');
 
@@ -239,31 +136,18 @@
             submitBtn.disabled = true;
             submitBtn.innerText = isTr ? "Gönderiliyor..." : "Sending...";
 
-            let finalFileUrl = "Yok (No Attachment)";
+            // FormData Paketini Oluştur
+            const formData = new FormData();
+            
+            // Web3Forms Doğrulanmış Canlı Erişim Anahtarı
+            formData.append("access_key", "5f1f954e-9c77-4ca3-9050-958741b0fac9");
+            
+            formData.append("name", nameInput.value);
+            formData.append("email", emailInput.value);
+            formData.append("subject", subjectInput.value);
+            formData.append("message", document.getElementById('message').value);
 
             try {
-                // 1. Adım: Eğer dosya eklenmişse ÜCRETSİZ Firebase Storage'a yükle
-                if (selectedFile) {
-                    const fileRef = ref(storage, `support_attachments/${Date.now()}_${selectedFile.name}`);
-                    const uploadResult = await uploadBytes(fileRef, selectedFile);
-                    finalFileUrl = await getDownloadURL(uploadResult.ref);
-                }
-
-                // 2. Adım: Web3Forms Metin Gönderim Paketini Hazırla
-                const formData = new FormData();
-                
-                // Buraya mail kutunuza az önce gelen Web3Forms Access Key'inizi yazın
-                formData.append("access_key", "5f1f954e-9c77-4ca3-9050-958741b0fac9");
-                
-                formData.append("name", nameInput.value);
-                formData.append("email", emailInput.value);
-                formData.append("subject", subjectInput.value);
-                
-                // Mail içeriğine Firebase'deki dosya indirme linkini yazı olarak gömüyoruz
-                const mailMessage = `${document.getElementById('message').value}\n\n---------------------------------\n[SİSTEM] Kullanıcının Yüklediği Ek Dosya Linki:\n${finalFileUrl}`;
-                formData.append("message", mailMessage);
-
-                // 3. Adım: Web3Forms API'sine sadece metin olarak fırlat (Asla hata vermez)
                 const response = await fetch("https://api.web3forms.com/submit", {
                     method: "POST",
                     body: formData
@@ -272,9 +156,8 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    alert(isTr ? "Destek talebiniz başarıyla iletildi!" : "Your support ticket has been successfully sent!");
+                    alert(isTr ? "Destek talebiniz başarıyla e-posta adresimize iletildi!" : "Your support ticket has been successfully sent to our email!");
                     form.reset();
-                    clearFileSelection();
                     updatePlaceholders(localStorage.getItem('instasafe-lang') || 'tr');
                 } else {
                     throw new Error(result.message || "API Error");
@@ -282,9 +165,9 @@
 
             } catch (error) {
                 console.error("Gönderim hatası: ", error);
-                alert(isTr ? "İşlem sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyin." : "An error occurred. Please try again later.");
+                alert(isTr ? "E-posta gönderilirken bir sorun oluştu. Lütfen daha sonra tekrar deneyin." : "An error occurred while sending email. Please try again later.");
             } finally {
-                // Butonu her durumda güvenli şekilde aç, kilitlenme yaşanmasın
+                // Her durumda butonu eski haline getirerek kilitlenmeyi önle
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = isTr ? `<span class="tr-content">Gönder</span>` : `<span class="en-content">Sent</span>`;
             }
