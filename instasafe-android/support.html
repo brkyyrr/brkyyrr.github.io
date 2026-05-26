@@ -37,11 +37,12 @@
         .file-dropzone p { font-size: 0.9rem; color: #ccc; font-weight: 600; }
         .file-dropzone span { font-size: 0.75rem; color: #777; margin-top: 5px; display: block; }
         #file-input { display: none; }
-        .file-list { margin-top: 10px; font-size: 0.85rem; color: #ff4b6b; font-weight: 600; text-align: left; }
+        .file-list { margin-top: 12px; font-size: 0.85rem; color: #ff4b6b; font-weight: 600; text-align: left; word-break: break-all; }
 
         /* Gönder Butonu */
         .submit-btn { width: 100%; padding: 16px; background: #0095f6; color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(0, 149, 246, 0.2); margin-top: 10px; }
-        .submit-btn:hover { background: #1aa1f7; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 149, 246, 0.4); }
+        .submit-btn:hover:not(:disabled) { background: #1aa1f7; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 149, 246, 0.4); }
+        .submit-btn:disabled { background: #444; color: #888; cursor: not-allowed; box-shadow: none; }
 
         footer { text-align: center; padding: 40px 20px; color: #555; font-size: 0.85rem; }
     </style>
@@ -53,7 +54,7 @@
         <div class="nav-right">
             <a href="index.html" class="back-link tr-content">&larr; Uygulama Sayfasına Dön</a>
             <a href="index.html" class="back-link en-content">&larr; Back to App Main</a>
-            <button class="lang-btn" id="lang-toggle" onclick="toggleLanguage()">EN</button>
+            <button class="lang-btn" id="lang-toggle">EN</button>
         </div>
     </nav>
 
@@ -62,7 +63,7 @@
         <h1 class="form-title en-content">Contact support</h1>
         <div class="form-divider"></div>
 
-        <form onsubmit="alert('Teknik Simülasyon: Form verileri ve eklenen görseller Firebase Storage entegrasyonu kurulduğunda panelinize düşecektir.'); return false;">
+        <form id="support-form">
             
             <div class="form-group">
                 <label class="tr-content" for="name">Adınız Soyadınız</label>
@@ -92,21 +93,23 @@
                 <label class="tr-content">Ek Dosyalar (İsteğe Bağlı)</label>
                 <label class="en-content">Attachments (optional)</label>
                 <p style="font-size:0.8rem; color:#666; margin-top:-5px; margin-bottom:10px;" class="tr-content">En fazla 5 MB görsel · En fazla 50 MB video</p>
-                <p style="font-size:0.8rem; color:#666; margin-top:-5px; margin-bottom:10px;" class="en-content">Images up to 5 MB · Videos up to 500 MB</p>
+                <p style="font-size:0.8rem; color:#666; margin-top:-5px; margin-bottom:10px;" class="en-content">Images up to 5 MB · Videos up to 50 MB</p>
                 
-                <div class="file-dropzone" id="dropzone" onclick="document.getElementById('file-input').click()">
+                <div class="file-dropzone" id="dropzone">
                     <span class="file-icon">📁</span>
                     <p class="tr-content">Dosyaları buraya sürükleyin veya tıklayın</p>
                     <p class="en-content">Click or drag files here</p>
                     <span class="tr-content">Görsel (JPG, PNG, GIF, WEBP) ve video (MP4, MOV, AVI)</span>
                     <span class="en-content">Images (JPG, PNG, GIF, WEBP) and videos (MP4, MOV, AVI)</span>
-                    <input type="file" id="file-input" multiple onchange="handleFiles(this.files)">
+                    <input type="file" id="file-input" accept="image/*,video/*">
                     <div class="file-list" id="file-list"></div>
                 </div>
             </div>
 
-            <button type="submit" class="submit-btn tr-content">Gönder</button>
-            <button type="submit" class="submit-btn en-content">Sent</button>
+            <button type="submit" id="submit-btn" class="submit-btn">
+                <span class="tr-content">Gönder</span>
+                <span class="en-content">Sent</span>
+            </button>
         </form>
     </div>
 
@@ -114,55 +117,68 @@
         BYOnTheGo Software Studio &copy; 2026.
     </footer>
 
-    <script>
-        function toggleLanguage() {
-            const body = document.body;
-            const btn = document.getElementById('lang-toggle');
-            const nameInput = document.getElementById('name');
-            const emailInput = document.getElementById('email');
-            const subjectInput = document.getElementById('subject');
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
-            if (body.classList.contains('lang-tr')) {
-                body.classList.remove('lang-tr');
-                body.classList.add('lang-en');
-                btn.innerText = 'TR';
-                localStorage.setItem('instasafe-lang', 'en');
-                subjectInput.value = "InstaSafe Pro - Mobile Support Request";
-                nameInput.placeholder = "Your Full Name";
-                emailInput.placeholder = "example@email.com";
-            } else {
-                body.classList.remove('lang-en');
-                body.classList.add('lang-tr');
-                btn.innerText = 'EN';
-                localStorage.setItem('instasafe-lang', 'tr');
+        // Kullanıcının Doğrulanmış Proje Ayarları
+        const firebaseConfig = {
+            apiKey: "AIzaSyDYQcB6wWqiIfYc-m3PgiVKMN1og74Blq8",
+            authDomain: "support-2e287.firebaseapp.com",
+            projectId: "support-2e287",
+            storageBucket: "support-2e287.firebasestorage.app",
+            messagingSenderId: "855107284742",
+            appId: "1:855107284742:web:32d16e2304bff8aed9b887",
+            measurementId: "G-E6EGQR897T"
+        };
+
+        // Servisleri Başlat
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+
+        let selectedFile = null;
+
+        // Dil Değiştirme Arayüz Yönetimi
+        const langBtn = document.getElementById('lang-toggle');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const subjectInput = document.getElementById('subject');
+
+        function updatePlaceholders(lang) {
+            if (lang === 'tr') {
+                document.body.className = 'lang-tr';
+                langBtn.innerText = 'EN';
                 subjectInput.value = "InstaSafe Pro - Mobil Destek Talebi";
                 nameInput.placeholder = "Adınız Soyadınız";
                 emailInput.placeholder = "ornek@eposta.com";
+            } else {
+                document.body.className = 'lang-en';
+                langBtn.innerText = 'TR';
+                subjectInput.value = "InstaSafe Pro - Mobile Support Request";
+                nameInput.placeholder = "Your Full Name";
+                emailInput.placeholder = "example@email.com";
             }
         }
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('instasafe-lang') || 'tr';
-            document.body.className = 'lang-' + savedLang;
-            document.getElementById('lang-toggle').innerText = savedLang === 'tr' ? 'EN' : 'TR';
-            
-            const nameInput = document.getElementById('name');
-            const emailInput = document.getElementById('email');
-            const subjectInput = document.getElementById('subject');
-            
-            if (savedLang === 'tr') {
-                subjectInput.value = "InstaSafe Pro - Mobil Destek Talebi";
-                nameInput.placeholder = "Adınız Soyadınız";
-                emailInput.placeholder = "ornek@eposta.com";
-            } else {
-                subjectInput.value = "InstaSafe Pro - Mobile Support Request";
-                nameInput.placeholder = "Your Full Name";
-                emailInput.placeholder = "example@email.com";
-            }
+
+        langBtn.addEventListener('click', () => {
+            const currentLang = document.body.classList.contains('lang-tr') ? 'en' : 'tr';
+            localStorage.setItem('instasafe-lang', currentLang);
+            updatePlaceholders(currentLang);
         });
 
+        // Sayfa İlk Açıldığında Dili Hatırla
+        const savedLang = localStorage.getItem('instasafe-lang') || 'tr';
+        updatePlaceholders(savedLang);
+
+        // Sürükle-Bırak Dosya Kontrolleri ve Boyut Validasyonu
         const dropzone = document.getElementById('dropzone');
-        
+        const fileInput = document.getElementById('file-input');
+        const fileList = document.getElementById('file-list');
+
+        dropzone.addEventListener('click', () => fileInput.click());
+
         ['dragenter', 'dragover'].forEach(eventName => {
             dropzone.addEventListener(eventName, (e) => {
                 e.preventDefault();
@@ -171,6 +187,7 @@
         });
 
         ['dragleave', 'drop'].forEach(eventName => {
+            dropzone.preventDefault;
             dropzone.addEventListener(eventName, (e) => {
                 e.preventDefault();
                 dropzone.classList.remove('dragover');
@@ -179,17 +196,94 @@
 
         dropzone.addEventListener('drop', (e) => {
             const dt = e.dataTransfer;
-            const files = dt.files;
-            handleFiles(files);
+            handleFileValidation(dt.files[0]);
         }, false);
 
-        function handleFiles(files) {
-            const fileList = document.getElementById('file-list');
-            fileList.innerHTML = "";
-            if(files.length > 0) {
-                fileList.innerHTML = "📎 " + Array.from(files).map(f => f.name).join(', ');
+        fileInput.addEventListener('change', (e) => {
+            handleFileValidation(e.target.files[0]);
+        });
+
+        function handleFileValidation(file) {
+            if (!file) return;
+
+            const isTr = document.body.classList.contains('lang-tr');
+            const fileType = file.type;
+            const fileSize = file.size;
+
+            // Görsel için 5MB, Video için 50MB sınırı kontrolü
+            if (fileType.startsWith('image/') && fileSize > 5 * 1024 * 1024) {
+                alert(isTr ? "Hata: Görsel boyutu en fazla 5 MB olabilir!" : "Error: Image size cannot exceed 5 MB!");
+                clearFileSelection();
+                return;
+            } else if (fileType.startsWith('video/') && fileSize > 50 * 1024 * 1024) {
+                alert(isTr ? "Hata: Video boyutu en fazla 50 MB olabilir!" : "Error: Video size cannot exceed 50 MB!");
+                clearFileSelection();
+                return;
             }
+
+            selectedFile = file;
+            fileList.innerHTML = `📎 ${file.name} (${(fileSize / (1024 * 1024)).toFixed(2)} MB)`;
         }
+
+        function clearFileSelection() {
+            selectedFile = null;
+            fileInput.value = "";
+            fileList.innerHTML = "";
+        }
+
+        // Form Gönderme ve Firestore Mail Tetikleme Akışı
+        const form = document.getElementById('support-form');
+        const submitBtn = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const isTr = document.body.classList.contains('lang-tr');
+
+            // Formu ve butonu kilitle
+            submitBtn.disabled = true;
+            submitBtn.innerText = isTr ? "Gönderiliyor..." : "Sending...";
+
+            let fileUrl = "Yok (No Attachment)";
+
+            try {
+                // 1. Eğer dosya eklenmişse Firebase Storage'a yükle
+                if (selectedFile) {
+                    const fileRef = ref(storage, `support_attachments/${Date.now()}_${selectedFile.name}`);
+                    const uploadResult = await uploadBytes(fileRef, selectedFile);
+                    fileUrl = await getDownloadURL(uploadResult.ref);
+                }
+
+                // 2. Verileri Trigger Email şablon yapısında Firestore'a yaz
+                await addDoc(collection(db, "mail"), {
+                    to: "byonthecode@gmail.com",
+                    message: {
+                        subject: subjectInput.value,
+                        text: `Ad Soyad: ${nameInput.value}\nE-posta: ${emailInput.value}\nKonu: ${subjectInput.value}\n\nMesaj:\n${document.getElementById('message').value}\n\nEkli Dosya Linki:\n${fileUrl}`,
+                        html: `
+                            <h3>Yeni Mobil Destek Talebi</h3>
+                            <p><b>Ad Soyad:</b> ${nameInput.value}</p>
+                            <p><b>E-posta:</b> ${emailInput.value}</p>
+                            <p><b>Mesaj Açıklaması:</b></p>
+                            <p style="background: #f4f4f4; padding: 15px; color: #333; border-radius: 8px;">${document.getElementById('message').value.replace(/\n/g, '<br>')}</p>
+                            <p><b>Ekli Ekran Dosyası:</b> ${fileUrl !== "Yok (No Attachment)" ? `<a href="${fileUrl}" target="_blank">Dosyayı Yeni Sekmede Aç</a>` : `Ek dosya yüklenmedi.`}</p>
+                        `
+                    }
+                });
+
+                // Başarılı bildirimi yap ve formu sıfırla
+                alert(isTr ? "Destek talebiniz başarıyla iletildi, e-posta adresinize dönüş sağlanacaktır." : "Support ticket sent successfully, we will get back to your email shortly.");
+                form.reset();
+                clearFileSelection();
+                updatePlaceholders(localStorage.getItem('instasafe-lang') || 'tr');
+
+            } catch (error) {
+                console.error("Gönderim hatası: ", error);
+                alert(isTr ? "Sistemsel bir hata oluştu. Lütfen daha sonra tekrar deneyin." : "A system error occurred. Please try again later.");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = isTr ? `<span class="tr-content">Gönder</span>` : `<span class="en-content">Sent</span>`;
+            }
+        });
     </script>
 </body>
 </html>
